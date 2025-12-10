@@ -1,0 +1,5 @@
+1. Add virtual class for shapes
+2. Make Christmas tree class (with decorations subclass)
+3. Add New Year text
+4. Add button to start spinning heart (maybe with different params, so make a params struct)
+

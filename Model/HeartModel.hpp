@@ -18,7 +18,7 @@ enum WindowSize{
       VSIZE = 1000,
 };
 
-class SpinHeart {
+class SpinHeart_OLD {
 public:
       sf::Vector2f origin;
       double t;
@@ -27,7 +27,7 @@ public:
       double tMem = 0;
       std::vector<sf::VertexArray> segments;
       
-      SpinHeart();
+      SpinHeart_OLD();
       
       sf::Vector2f getPointOnShape(bool random=false);
       void addPoint(sf::Vector2f vec);

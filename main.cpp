@@ -5,7 +5,7 @@
 //  Created by Michael Lebedev on 09.12.2025.
 //
 
-#include "HeartModel.hpp"
+#include "Model/Shapes.hpp"
 
 enum Params {
       ANANASTYA,
@@ -15,7 +15,7 @@ enum Params {
 
 
 int main(void) {
-      int mode = ANANASTYA;
+      int mode = MISHOON;
       int delay = 1;
       int framesToSkip = 1;
       double step = 1;

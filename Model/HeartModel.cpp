@@ -8,7 +8,7 @@
 #include "HeartModel.hpp"
 #define eps 1e-9
 
-SpinHeart::SpinHeart() {
+SpinHeart_OLD::SpinHeart_OLD() {
       origin = {HSIZE / 2, VSIZE / 2};
       t = 0;
       step = 180 * 2;
@@ -16,7 +16,7 @@ SpinHeart::SpinHeart() {
 }
 
 
-sf::Vector2f SpinHeart::getPointOnShape(bool random) {
+sf::Vector2f SpinHeart_OLD::getPointOnShape(bool random) {
       srand((unsigned int)time(NULL));
       float arg = t;
       if (mem == 2) {
@@ -38,7 +38,7 @@ sf::Vector2f SpinHeart::getPointOnShape(bool random) {
 }
 
 
-void SpinHeart::addPoint(sf::Vector2f vec) {
+void SpinHeart_OLD::addPoint(sf::Vector2f vec) {
       if (segments.size() >= 1000) {
             segments.erase(segments.begin());
       }
@@ -52,7 +52,7 @@ void SpinHeart::addPoint(sf::Vector2f vec) {
       segments.push_back(seg);
 }
 
-void SpinHeart::draw(sf::RenderWindow *window) {
+void SpinHeart_OLD::draw(sf::RenderWindow *window) {
       for (sf::VertexArray seg : segments) {
             window->draw(seg);
       }
