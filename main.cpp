@@ -7,6 +7,7 @@
 
 #include "Model/Shapes.hpp"
 #include "Model/Button.hpp"
+#include "Model/ChristmasTree.hpp"
 
 enum Params {
       ANANASTYA,
@@ -25,7 +26,7 @@ void DisplayWindow(sf::RenderWindow *window) {
       bool buttonClicked = false;
       
       if (mode == ANANASTYA) {
-            // Ananastasia's Heart
+            // Ananastasia's Heart (random points on shape)
             delay = 50000000;
             framesToSkip = 1;
             random = true;
@@ -33,6 +34,7 @@ void DisplayWindow(sf::RenderWindow *window) {
       }
       
       if (mode == MISHOON) {
+            // Mishoon's Heart (spinning rays from origin)
             delay = 50000;
             framesToSkip = 10;
             random = false;
@@ -54,13 +56,14 @@ void DisplayWindow(sf::RenderWindow *window) {
       req.tv_nsec = delay;
 
       
+      Tree Ltree = Tree({HSIZE / 6 + 20, VSIZE / 4}, 4, 70, VSIZE / 2 + VSIZE / 5);
+      Tree Rtree = Tree({HSIZE - HSIZE / 6 - 20, VSIZE / 4}, 4, 70, VSIZE / 2 + VSIZE / 5);
       SpinHeart heart = SpinHeart();
       if (!random) {
             heart.step = step;
       }
       
       Button butt = Button({HSIZE / 2, VSIZE / 2}, buttonClicked, "Click me!");
-
       
       int cnt = 0;
       while (window->isOpen()) {
@@ -82,7 +85,9 @@ void DisplayWindow(sf::RenderWindow *window) {
                   if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
                         sf::Vector2i posi =  sf::Mouse::getPosition(*window);
                         sf::Vector2f pos = {static_cast<float>(posi.x), static_cast<float>(posi.y)};
-                        // printf("Click pos: (%.2lf, %.2lf) \n", pos.x, pos.y);
+                        printf("Click pos: (%.2lf, %.2lf) \n", pos.x, pos.y);
+                        // bool press = butt.checkPress(pos);
+                        // printf("%d \n", press);
                         if (butt.checkPress(pos)) {
                               printf("Pressed: %d ->", butt.linkedVar);
                               butt.linkedVar = true;
@@ -100,6 +105,8 @@ void DisplayWindow(sf::RenderWindow *window) {
                         heart.draw(window);
                   else
                         butt.draw(window);
+                  Rtree.draw(window);
+                  Ltree.draw(window);
                   window->display();
                   cnt = 0;
             }

@@ -36,5 +36,5 @@ Button::Button(sf::Vector2f pos, bool var, std::string text) {
 }
 
 bool Button::checkPress(sf::Vector2f click) {
-      return ((click - pos).x < size.x && (click - pos).y < size.y);
+      return (fabs((click - pos).x) < size.x && fabs((click - pos).y) < size.y);
 }
