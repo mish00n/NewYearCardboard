@@ -6,8 +6,12 @@
 //
 
 #include "ChristmasTree.hpp"
+#include "Shapes.hpp"
 
-Tree::Tree(sf::Vector2<float> origin, int numOfLayers, int widthStep, int height) {
+
+
+
+Tree::Tree(sf::Vector2f origin, int numOfLayers, int widthStep, int height) {
       this->height = height;
       this->numOfLayers = numOfLayers;
       this->widthStep = widthStep;
@@ -36,6 +40,12 @@ void Tree::buildTreeFill() {
             
             layer.setFillColor(sf::Color::Green);
             layers.push_back(layer);
+            
+//            for (int j = 0; j < (i + 1) * 50; j++) {
+//                  Light bulb = Light(layer);
+//                  bulb.colorNum = j % 6;
+//                  lights.push_back(bulb);
+//            }
             
             dx += widthStep;
             dy += height / numOfLayers;
@@ -77,5 +87,8 @@ void Tree::buildTreeOutline() {
 void Tree::draw(sf::RenderWindow *window) {
       for (sf::ConvexShape layer: layers)
             window->draw(layer);
-      window->draw(treeOutline);
+//      if (lightsOn)
+//            for (Light bulb : lights)
+//                  bulb.draw(window);
+      // window->draw(treeOutline);
 }

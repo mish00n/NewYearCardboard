@@ -5,7 +5,7 @@
 //  Created by Michael Lebedev on 05.12.2025.
 //
 
-#include "Button.hpp"
+#include "ButtonForHeart.hpp"
 
 
 void Button::draw(sf::RenderWindow *window) {
@@ -36,5 +36,5 @@ Button::Button(sf::Vector2f pos, bool var, std::string text) {
 }
 
 bool Button::checkPress(sf::Vector2f click) {
-      return (fabs((click - pos).x) < size.x && fabs((click - pos).y) < size.y);
+      return ((click - pos).x < size.x && (click - pos).y < size.y && (click - pos).x > 0 && (click - pos).y > 0);
 }

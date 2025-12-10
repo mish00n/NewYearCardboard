@@ -5,9 +5,9 @@
 //  Created by Michael Lebedev on 09.12.2025.
 //
 
-#include "Model/Shapes.hpp"
-#include "Model/Button.hpp"
-#include "Model/ChristmasTree.hpp"
+#include "Shapes.hpp"
+#include "ButtonForHeart.hpp"
+#include "ChristmasTree.hpp"
 
 enum Params {
       ANANASTYA,
@@ -67,6 +67,7 @@ void DisplayWindow(sf::RenderWindow *window) {
       
       int cnt = 0;
       while (window->isOpen()) {
+            srand((int)time(NULL));
             nanosleep(&req, NULL);
             cnt++;
             if (butt.linkedVar) {
@@ -91,6 +92,8 @@ void DisplayWindow(sf::RenderWindow *window) {
                         if (butt.checkPress(pos)) {
                               printf("Pressed: %d ->", butt.linkedVar);
                               butt.linkedVar = true;
+                              Rtree.lightsOn = true;
+                              Ltree.lightsOn = true;
                               printf("%d \n", butt.linkedVar);
                         }
                   }
