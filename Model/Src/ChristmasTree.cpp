@@ -41,11 +41,15 @@ void Tree::buildTreeFill() {
             layer.setFillColor(sf::Color::Green);
             layers.push_back(layer);
             
-//            for (int j = 0; j < (i + 1) * 50; j++) {
-//                  Light bulb = Light(layer);
-//                  bulb.colorNum = j % 6;
-//                  lights.push_back(bulb);
-//            }
+            for (int j = 1; j < (i + 1) * 5 + 1; j++) {
+                  sf::Vector2f pos = (layer.getPoint(0) - layer.getPoint(1) + layer.getPoint(2) - layer.getPoint(1));
+                  pos = {static_cast<float>(pos.x / 2 / (i * 5 + 5) * j), static_cast<float>(pos.y / 2 / (i * 5 + 5) * j)};
+                  
+                  pos += layer.getPoint(1);
+                  Light bulb = Light(pos);
+                  bulb.colorNum = j % 6;
+                  lights.push_back(bulb);
+            }
             
             dx += widthStep;
             dy += height / numOfLayers;
@@ -87,8 +91,52 @@ void Tree::buildTreeOutline() {
 void Tree::draw(sf::RenderWindow *window) {
       for (sf::ConvexShape layer: layers)
             window->draw(layer);
-//      if (lightsOn)
-//            for (Light bulb : lights)
-//                  bulb.draw(window);
-      // window->draw(treeOutline);
+      if (lightsOn)
+            for (Light &bulb : lights)
+                  bulb.draw(window);
+       window->draw(treeOutline);
+}
+
+Light::Light(sf::Vector2f pos) {
+      this->pos = pos;
+}
+
+void Light::draw(sf::RenderWindow *window) {
+      // printf("pos = (%.2lf, %.2lf) \n", pos.x, pos.y);
+      
+      // printf("cnt = %d", cnt);
+      if (cnt % 100 == 0) {
+            printf("Changing Color... \n");
+            colorNum = (colorNum + 1) % 6;
+            cnt = 0;
+      }
+      cnt++;
+      switch (colorNum) {
+            case 0:
+                  color = sf::Color::White;
+                  break;
+            case 1:
+                  color = sf::Color::Blue;
+                  break;
+            case 2:
+                  color = sf::Color::Red;
+                  break;
+            case 3:
+                  color = sf::Color::Yellow;
+                  break;
+            case 4:
+                  color = sf::Color::White;
+                  break;
+            case 5:
+                  color = sf::Color::Blue;
+                  break;
+            default:
+                  break;
+      }
+      sf::CircleShape circle;
+      circle.setRadius(radius);
+      circle.setFillColor(color);
+      circle.setPosition(pos);
+      
+      window->draw(circle);
 }

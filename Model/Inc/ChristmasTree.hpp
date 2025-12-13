@@ -15,9 +15,10 @@ public:
       sf::Vector2f pos;
       float radius = 3;
       int colorNum = 0;
+      int cnt = 0;
       sf::Color color = sf::Color::Blue;
       
-      Light(sf::ConvexShape shape);
+      Light(sf::Vector2f pos);
       void draw(sf::RenderWindow *window);
 };
 
